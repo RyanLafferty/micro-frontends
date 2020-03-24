@@ -12,20 +12,14 @@ class MicroFrontend extends React.Component {
       fetch(`${host}/asset-manifest.json`)
         .then(res => res.json())
         .then(manifest => {
-          let scriptId = 1;
-          Object.keys(manifest).forEach(function (item) {
+          let id = 1;
+          Object.keys(manifest).forEach(function (asset) {
             // debugging application
-            console.log(`item: ${item}`);
-            console.log(`manifest[item]: ${manifest[item]}`);
+            console.log(`asset: ${asset}`);
+            console.log(`path: ${manifest[asset]}`);
 
-            if(item === 'app.js') {
-              this.appendScript(host, manifest[item], name, 'app');
-            } else if(item.includes('.js')) {
-              this.appendScript(host, manifest[item], name, scriptId);
-              scriptId += 1;
-            } else if(item.includes('.css')) {
-              this.appendStyleSheet(host, manifest[item]);
-            }
+            this.appendAsset(host, name, asset, manifest[asset], id);
+            id += 1;
           });
         });
     }
@@ -36,6 +30,16 @@ class MicroFrontend extends React.Component {
 
     // TODO: update this
     window[`unmount${name}`](`${name}-container`);
+  }
+
+  appendAsset(host, name, asset, path, id) {
+    if(asset === 'app.js') {
+      this.appendScript(host, path, name, 'app');
+    } else if(asset.includes('.js')) {
+      this.appendScript(host, path, name, id);
+    } else if(asset.includes('.css')) {
+      this.appendStyleSheet(host, path);
+    }
   }
 
   appendScript = (host, path, name, id) => {
