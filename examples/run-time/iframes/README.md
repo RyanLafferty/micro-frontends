@@ -30,3 +30,17 @@ docker-compose up
 ``` bash
 docker-compose down
 ```
+
+## Access
+
+### Core Application
+
+```bash
+  http://localhost:3000
+```
+
+### Child Application
+
+```bash
+  http://localhost:3001
+```
