@@ -3,38 +3,33 @@ import React from 'react';
 // source: https://martinfowler.com/articles/micro-frontends.html#Run-timeIntegrationViaIframes
 class MicroFrontend extends React.Component {
   componentDidMount() {
-    const { name, host } = this.props;
-    const mainAppScriptId = `micro-frontend-script-${name}-app`;
+    const { name } = this.props;
+    const mainAppScriptId = `micro-frontend-script-${name}-main`;
 
-    if (document.getElementById(mainAppScriptId)) {
-      this.renderMicroFrontend();
-    } else {
-      fetch(`${host}/asset-manifest.json`)
-        .then(res => res.json())
-        .then(manifest => {
-          let id = 1;
-          Object.keys(manifest).forEach(function (asset) {
-            // debugging application
-            console.log(`asset: ${asset}`);
-            console.log(`path: ${manifest[asset]}`);
-
-            this.appendAsset(host, name, asset, manifest[asset], id);
-            id += 1;
-          });
-        });
+    // check if assets have been loaded
+    if (!document.getElementById(mainAppScriptId)) {
+      this.appendAssets();
     }
   }
 
-  componentWillUnmount() {
-    const { name } = this.props;
+  appendAssets = async () => {
+    const { name, host } = this.props;
+    let id = 1;
 
-    // TODO: update this
-    window[`unmount${name}`](`${name}-container`);
+    // fetch manifest
+    const response = await fetch(`${host}asset-manifest.json`);
+    const manifest = await response.json();
+
+    // append assets
+    Object.keys(manifest).forEach((asset) => {
+      this.appendAsset(host, name, asset, manifest[asset], id);
+      id += 1;
+    });
   }
 
   appendAsset(host, name, asset, path, id) {
     if(asset === 'app.js') {
-      this.appendScript(host, path, name, 'app');
+      this.appendScript(host, path, name, 'main');
     } else if(asset.includes('.js')) {
       this.appendScript(host, path, name, id);
     } else if(asset.includes('.css')) {
@@ -44,12 +39,10 @@ class MicroFrontend extends React.Component {
 
   appendScript = (host, path, name, id) => {
     const script = document.createElement('script');
-    const scriptId = `micro-frontend-script-${name}-${id}`;
   
     // configure script
-    script.id = scriptId;
+    script.id = `micro-frontend-script-${name}-${id}`;
     script.src = `${host}${path}`;
-    script.onload = this.renderMicroFrontend;
   
     document.head.appendChild(script);
   }
@@ -64,18 +57,11 @@ class MicroFrontend extends React.Component {
     document.head.appendChild(stylesheet);
   }
 
-  renderMicroFrontend = () => {
-    const { name } = this.props;
-
-    // TODO: update this
-    window[`render${name}`](`${name}-container`);
-  };
-
   render() {
     const { name } = this.props;
 
     return (
-      <main id={`${name}-container`} />
+      <div id={name} />
     );
   }
 }

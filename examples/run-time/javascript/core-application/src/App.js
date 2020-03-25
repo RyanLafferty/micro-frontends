@@ -8,10 +8,12 @@ function App() {
       <h1 className="contentContainer core">
         Core Application
       </h1>
-      <MicroFrontend
-        name="Child"
-        host="http://localhost:3001/"
-      />
+      <div className="contentContainer">
+        <MicroFrontend
+          name="child-app"
+          host="http://localhost:3001/"
+        />
+      </div>
     </div>
   );
 }
