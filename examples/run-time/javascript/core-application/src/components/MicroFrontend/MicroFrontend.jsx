@@ -12,6 +12,10 @@ class MicroFrontend extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    // TODO: Cleanup DOM
+  }
+
   appendAssets = async () => {
     const { name, host } = this.props;
     let id = 1;
