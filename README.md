@@ -126,12 +126,14 @@ Each application is included in the document through the use of script tags. Rou
 
 ### Build Time
 
-TODO
+* Packages
+* [TODO] Web Components (SFCs, Wrapper)
 
 ### Run Time
 
 * Iframes
 * Javascript
+* [TODO] Web Components (SFCs, Wrapper)
 
 ## Sources
 
