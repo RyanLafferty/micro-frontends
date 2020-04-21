@@ -141,3 +141,5 @@ Each application is included in the document through the use of script tags. Rou
 * https://medium.com/@_rchaves_/building-microfrontends-part-ii-joining-apps-together-dfa1b6f17d3e
 * https://dev.to/florianrappl/5-reasons-for-doing-microfrontends-1mba
 * https://micro-frontends.org/
+* https://dzone.com/articles/create-amp-publish-web-components-with-vue-cli-3
+* https://github.com/vuejs/vue-web-component-wrapper
