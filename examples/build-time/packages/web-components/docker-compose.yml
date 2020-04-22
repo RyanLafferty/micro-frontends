@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  core-application:
+    image: micro-frontends/examples/build-time/packages/core-application
+    container_name: packages-core-application
+    build:
+      context: .
+      dockerfile: config/core-application/Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
