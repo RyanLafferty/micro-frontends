@@ -43,4 +43,6 @@ docker-compose down
 ```
 
 ## Sources
-TODO
+
+* https://dzone.com/articles/create-amp-publish-web-components-with-vue-cli-3
+* https://github.com/vuejs/vue-web-component-wrapper
