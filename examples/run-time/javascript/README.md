@@ -50,5 +50,5 @@ docker-compose down
 
 ## Sources
 
-* https://martinfowler.com/articles/micro-frontends.html#Run-timeIntegrationViaIframes
+* https://martinfowler.com/articles/micro-frontends.html
 * https://tarikhamilton.com/blog/2019/03/25/create-an-asset-manifest-json-like-create-react-app-using-vue-cli/

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// source: https://martinfowler.com/articles/micro-frontends.html#Run-timeIntegrationViaIframes
+// source: https://martinfowler.com/articles/micro-frontends.html
 class MicroFrontend extends React.Component {
   componentDidMount() {
     const { name } = this.props;
