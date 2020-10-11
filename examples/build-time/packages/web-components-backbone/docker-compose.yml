@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  backbone-application:
+    image: micro-frontends/examples/build-time/packages/backbone-application
+    container_name: packages-backbone-application
+    build:
+      context: .
+      dockerfile: config/backbone-application/Dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
