@@ -1,4 +1,4 @@
-# JS Implementation
+# Web Component Implementation
 
 ## Requirements
 
